@@ -1,0 +1,43 @@
+{{ form_start(form) }}
+   <div class="container mt-4 p-3">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="p-3 bg-white shadow rounded">
+                <h1 class="mb-4 text-center">Book</h1>
+
+                {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
+                <div class="mb-3">
+                    {{ form_label(form.title, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Enter book title'}}) }}
+                    {{ form_errors(form.title, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.author, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.author, {'attr': {'class': 'form-control', 'placeholder': 'Enter author name'}}) }}
+                    {{ form_errors(form.author, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.isbn, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.isbn, {'attr': {'class': 'form-control', 'placeholder': 'Enter ISBN'}}) }}
+                    {{ form_errors(form.isbn, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.stock, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.stock, {'attr': {'class': 'form-control', 'placeholder': 'Enter stock quantity'}}) }}
+                    {{ form_errors(form.stock, {'attr': {'class': 'text-danger'}}) }}
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Save Book</button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

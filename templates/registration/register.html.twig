@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4 p-3" >
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="p-3 bg-white shadow rounded">
+            <h1 class="mb-4 text-center">Register New User</h1>
+
+            {{ form_start(registrationForm, {'attr': {'class': 'needs-validation'}}) }}
+
+            <div class="mb-3">
+                {{ form_label(registrationForm.name, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control', 'placeholder': 'Enter your name'}}) }}
+                {{ form_errors(registrationForm.name, {'attr': {'class': 'text-danger'}}) }}
+            </div>
+
+           
+            <div class="mb-3">
+                {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Enter your email'}}) }}
+                {{ form_errors(registrationForm.email, {'attr': {'class': 'text-danger'}}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(registrationForm.telephone, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Enter your telephone number'}}) }}
+                {{ form_errors(registrationForm.telephone, {'attr': {'class': 'text-danger'}}) }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Enter your password'}}) }}
+                {{ form_errors(registrationForm.plainPassword, {'attr': {'class': 'text-danger'}}) }}
+            </div>
+
+            
+            <div class="mb-3 form-check">
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                {{ form_errors(registrationForm.agreeTerms, {'attr': {'class': 'text-danger'}}) }}
+            </div>
+
+           
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+
+            {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+ </div> 
+
+
+
+{% endblock %}

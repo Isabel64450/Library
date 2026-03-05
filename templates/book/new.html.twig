@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Book{% endblock %}
+
+{% block body %}
+<div class="container mt-4 p-3">
+   <div class="row justify-content-center"> 
+       <div class="card shadow"> 
+          <div class="card-body p-4"> 
+          <h1 class="h4 text-center mb-4">Register New Book</h1>
+           {{ include('book/_form.html.twig') }}
+           <div class="text-center mt-3"> 
+               <a href="{{ path('app_book_index') }}" class="btn btn-secondary"> Back to list </a>
+            </div>
+        </div> 
+    </div>
+ 
+</div>
+  
+  
+
+
+
+
+
+
+
+
+
+{# <div class="container">
+    <h1>Register new Book</h1>
+
+    {{ include('book/_form.html.twig') }}
+
+    <a href="{{ path('app_book_index') }}">back to list</a>
+</div>
+ #}
+   
+{% endblock %}
