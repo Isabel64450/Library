@@ -8,11 +8,16 @@
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_book_index') }}">Catalogue</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="catalogDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Catalogue
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="catalogDropdown">
+                        <li><a class="dropdown-item" href="{{ path('app_book_index') }}">All Books</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_book_new') }}">New Book</a></li>
+                    </ul>
                 </li>
-                
-                
 
                 {% if is_granted("ROLE_ADMIN") %}
                  <li class="nav-item dropdown">
