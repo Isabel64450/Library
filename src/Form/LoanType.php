@@ -7,6 +7,7 @@ use App\Entity\Loan;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,16 +22,19 @@ class LoanType extends AbstractType
             ->add('returnDate', null, [
                 'widget' => 'single_text',
             ])
-            ->add('status')
-            ->add('book', EntityType::class, [
-                'class' => Book::class,
-                'choice_label' => 'id',
-            ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
-        ;
+            /* ->add('status',ChoiceType::class, [
+            'choices' => [
+            'Current' => 'current',
+            'Delayed' => 'delayed',
+            'Completed' => 'completed',],
+            'expanded' => false, 
+            'placeholder' => 'Sélectionner un statut',
+            'attr' => ['class' => 'form-select'],
+            ]) */
+            
+            ->add('user', UserType::class, [
+        'by_reference' => false]);
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

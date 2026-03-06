@@ -71,24 +71,24 @@ class Loan
         return $this;
     }
 
-    public function getBookId(): ?Book
+    public function getBook(): ?Book
     {
         return $this->book;
     }
 
-    public function setBookId(?Book $book): static
+    public function setBook(?Book $book): static
     {
         $this->book = $book;
 
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUserId(?User $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 

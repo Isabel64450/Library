@@ -1,0 +1,25 @@
+
+
+<div class="row mb-3 align-items-center">
+    <label class="col-sm-3 col-form-label text-end" for="{{ form.name.vars.id }}">Nom</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.name) }}
+    </div>
+</div>
+
+<div class="row mb-3 align-items-center">
+    <label class="col-sm-3 col-form-label text-end" for="{{ form.email.vars.id }}">Email</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.email) }}
+    </div>
+</div>
+
+<div class="row mb-3 align-items-center">
+    <label class="col-sm-3 col-form-label text-end" for="{{ form.telephone.vars.id }}">Téléphone</label>
+    <div class="col-sm-9">
+        {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.telephone) }}
+    </div>
+</div>

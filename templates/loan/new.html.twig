@@ -1,0 +1,52 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle emprunt{% endblock %}
+
+{% block body %}
+<div class="container mt-4 p-3">
+    <div class="row justify-content-center">
+        <div class="card shadow col-md-6">
+            <div class="card-body p-4">
+                <h1 class="h4 text-center mb-2">Emprunt -{{book.title}} </h1>
+
+                <p class="text-center text-muted mb-4">
+                    {{ book.stock }} exemplaires disponibles
+                </p>
+                                           
+                {{ form_start(form) }}            
+
+                {% include 'loan/_user_form.html.twig' with {'form': form.user} %}
+                <div class="mb-3">
+                    {{ form_label(form.loanDate, 'Date emprunt', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.loanDate, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.loanDate) }}
+                </div>
+
+              
+                <div class="mb-3">
+                    {{ form_label(form.returnDate, 'Date retour', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.returnDate, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.returnDate) }}
+                </div>
+
+                <div class="text-center mt-4">
+                {# {% include 'loan/_user_form.html.twig' with {'form': form.user} %} #}
+
+                    <button type="submit" class="btn btn-success">
+                        ENREGISTRER L'EMPRUNT
+                    </button>
+
+                    <a href="{{ path('app_loan_list') }}" class="btn btn-secondary ms-2">
+                        Retour
+                    </a>
+                </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

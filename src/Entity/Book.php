@@ -103,7 +103,7 @@ class Book
     {
         if (!$this->loans->contains($loan)) {
             $this->loans->add($loan);
-            $loan->setBookId($this);
+            $loan->setBook($this);
         }
 
         return $this;
@@ -113,8 +113,8 @@ class Book
     {
         if ($this->loans->removeElement($loan)) {
             // set the owning side to null (unless already changed)
-            if ($loan->getBookId() === $this) {
-                $loan->setBookId(null);
+            if ($loan->getBook() === $this) {
+                $loan->setBook(null);
             }
         }
 

@@ -31,7 +31,7 @@
                         <td>
                             <a class="btn btn-sm btn-info" href="{{ path('app_book_show', {'id': book.id}) }}">Show</a>
                             <a class="btn btn-sm btn-warning" href="{{ path('app_book_edit', {'id': book.id}) }}">Edit</a>
-                            <a class="btn btn-sm btn-success" href="#{# {{ path('app_book_edit', {'id': book.id}) }} #}">Loan</a>
+                            <a class="btn btn-sm btn-success" href="{{ path('app_loan_new', {'id': book.id}) }}" >Loan</a>
                         </td>
                     </tr>
                 {% else %}
