@@ -22,18 +22,15 @@ class LoanType extends AbstractType
             ->add('returnDate', null, [
                 'widget' => 'single_text',
             ])
-            /* ->add('status',ChoiceType::class, [
-            'choices' => [
-            'Current' => 'current',
-            'Delayed' => 'delayed',
-            'Completed' => 'completed',],
-            'expanded' => false, 
-            'placeholder' => 'Sélectionner un statut',
-            'attr' => ['class' => 'form-select'],
-            ]) */
             
-            ->add('user', UserType::class, [
-        'by_reference' => false]);
+            
+            ->add('user', EntityType::class, [
+                  'class' => User::class,
+                  'choice_label' => function(User $user) {
+                   return $user->getName() . ' - ' . $user->getEmail() . ' - ' . $user->getTelephone();},
+                  'placeholder' => 'Sélectionner un utilisateur',
+                  'attr' => ['class' => 'form-select']
+             ]);
         
     }
 

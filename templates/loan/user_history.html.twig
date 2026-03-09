@@ -1,0 +1,54 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des emprunts{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card body">
+        <h2 class="mb-3">Historique des emprunts de {{ user.name }}</h2>
+
+          {% if loans is empty %}
+          <p class="text-muted">Cet utilisateur n’a aucun emprunt enregistré.</p>
+          {% else %}
+          <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Livre</th>
+                    <th>Date emprunt</th>
+                    <th>Date retour</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for loan in loans %}
+                    <tr class="text-center">
+                        <td class="text-start">{{ loan.book.title }}</td>
+                        <td>{{ loan.loanDate|date('d/m/Y') }}</td>
+                        <td>{{ loan.returnDate|date('d/m/Y') }}</td>
+                        <td>
+                            {% if loan.status == 'completed' %}
+                                <span class="badge bg-success">{{ loan.status|capitalize }}</span>
+                            {% elseif loan.status == 'delayed' %}
+                                <span class="badge bg-danger">{{ loan.status|capitalize }}</span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">{{ loan.status|capitalize }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+           </table>
+           {% endif %}
+
+             
+      </div>  
+      
+    </div>
+    <a href="{{ path('app_loan_list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+</div>
+
+    
+{% endblock %}

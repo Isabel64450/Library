@@ -6,6 +6,74 @@
 {% block body %}
 <div class="container mt-4 p-3">
     <div class="row justify-content-center">
+        <div class="card shadow col-md-8 col-lg-6">
+            <div class="card-body p-4">
+
+                <h1 class="h4 text-center mb-3">Emprunt - {{ book.title }}</h1>
+                <p class="text-center text-muted mb-4">{{ book.stock }} exemplaires disponibles</p>
+
+               
+
+                {{ form_start(form) }}
+
+                
+                <div class="mb-3">
+                    {{ form_label(form.user, 'Utilisateur') }}
+                    {{ form_widget(form.user, {'attr': {'class': 'form-select'}}) }}
+                    {{ form_errors(form.user) }}
+                </div>
+
+           
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form_label(form.loanDate, 'Date emprunt') }}
+                        {{ form_widget(form.loanDate, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.loanDate) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_label(form.returnDate, 'Date retour') }}
+                        {{ form_widget(form.returnDate, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.returnDate) }}
+                    </div>
+                </div>
+
+                
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success px-5">ENREGISTRER L'EMPRUNT</button>
+                    <a href="{{ path('app_loan_list') }}" class="btn btn-secondary px-4 ms-2">Retour</a>
+                </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{# <div class="container mt-4 p-3">
+    <div class="row justify-content-center">
         <div class="card shadow col-md-6">
             <div class="card-body p-4">
                 <h1 class="h4 text-center mb-2">Emprunt -{{book.title}} </h1>
@@ -31,7 +99,7 @@
                 </div>
 
                 <div class="text-center mt-4">
-                {# {% include 'loan/_user_form.html.twig' with {'form': form.user} %} #}
+                
 
                     <button type="submit" class="btn btn-success">
                         ENREGISTRER L'EMPRUNT
@@ -48,5 +116,5 @@
         </div>
     </div>
 </div>
-
+ #}
 {% endblock %}

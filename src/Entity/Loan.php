@@ -19,8 +19,8 @@ class Loan
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $returnDate = null;
 
-    #[ORM\Column(length: 180, options: ["default" => "current"])]
-    private ?string $status = null;
+    #[ORM\Column(length: 180)]
+    private ?string $status = 'current';
 
     #[ORM\ManyToOne(inversedBy: 'loans')]
     #[ORM\JoinColumn(nullable: false)]

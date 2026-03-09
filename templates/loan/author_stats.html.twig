@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques par auteur{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+   
+
+    <div class="card shadow">
+        <div class="card-body">
+         <h2 class="mb-4 text-center">Nombre d’emprunts par auteur</h2>
+            <table class="table table-hover table-bordered align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Auteur</th>
+                        <th>Nombre d’emprunts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for auteur, count in compteurs %}
+                        <tr class="text-center">
+                            <td class="text-start">{{ auteur }}</td>
+                            <td>
+                                <span class="badge bg-success fs-6">{{ count }}</span>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="2" class="text-center text-muted">Aucun emprunt enregistré</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
