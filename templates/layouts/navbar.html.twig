@@ -8,29 +8,19 @@
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="catalogDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Catalogue
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="catalogDropdown">
-                        <li><a class="dropdown-item" href="{{ path('app_book_index') }}">All Books</a></li>
-                        <li><a class="dropdown-item" href="{{ path('app_book_new') }}">New Book</a></li>
-                    </ul>
-                </li>
-
+                
                 {% if is_granted("ROLE_ADMIN") %}
-                 <li class="nav-item dropdown">
-                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Admin </a>
-                  <ul class="dropdown-menu">
+                    <li class="nav-item dropdown">
+                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Admin </a>
+                            <ul class="dropdown-menu">
                  
-                  <li><a class="dropdown-item" href="{{ path('app_loan_list')}}">Utilisateurs</a></li>
+                              <li><a class="dropdown-item" href="{{ path('app_loan_list')}}">Utilisateurs</a></li>
+                              <li><a class="dropdown-item" href="{{ path('app_book_index') }}">All Books</a></li>
+                              <li><a class="dropdown-item" href="{{ path('app_book_new') }}">New Book</a></li>
                   
-                  </ul>
-                </li>
-                 {% endif %}
-
-                </li>
+                            </ul>
+                    </li>
+                 
                 <li class="nav-item">
                     <a class="nav-link" href=" {{ path('app_loan_list')}} ">Loans</a> 
                 </li>
@@ -38,6 +28,15 @@
                  <li class="nav-item">
                 <a class="nav-link" href="{{ path('app_loan_author_stats') }}"> Stats par auteur </a>
                 </li>
+
+
+                 {% endif %}
+
+                {% if app.user and not is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_book_index') }}">All Books</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">

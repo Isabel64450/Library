@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class LoanController extends AbstractController
 {
-    #[Route('/loan', name: 'app_loan_list')]
+    #[Route('admin/loan', name: 'app_loan_list')]
     public function listLoan(EntityManagerInterface $entityManager): Response      
        
 
@@ -62,7 +62,8 @@ public function editLoan(Loan $loan, EntityManagerInterface $entityManager): Res
 {
     
     $loan->setStatus('completed');
-
+    $book=$loan->getBook();
+    $book->setStock($book->getStock()+1);
     $entityManager->persist($loan);
     $entityManager->flush();
 
@@ -81,7 +82,7 @@ public function showLoan(Loan $loan): Response
 }
 
 
-#[Route('/loan/stats/authors', name: 'app_loan_author_stats')]
+#[Route('admin/loan/stats/authors', name: 'app_loan_author_stats')]
 public function authorStats(EntityManagerInterface $entityManager): Response
 {
     $loans = $entityManager->getRepository(Loan::class)->findAll();
@@ -118,14 +119,6 @@ public function userHistory(User $user, EntityManagerInterface $entityManager): 
         'loans' => $loans,
     ]);
 }
-
-
-
-
-
-
-
-
 
 
 

@@ -47,7 +47,9 @@
       </div>  
       
     </div>
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_loan_list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+    {% endif %}
 </div>
 
     

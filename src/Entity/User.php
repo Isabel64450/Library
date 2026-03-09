@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $telephone = null;
 
     #[ORM\Column(type:"json")]
-    private array $roles = [];
+    private array $roles = ['ROLE_USER'];
 
     #[ORM\Column(length: 180)]
     private ?string $password = null;
@@ -99,7 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->loans->contains($loan)) {
             $this->loans->add($loan);
-            $loan->setUserId($this);
+            $loan->setUser($this);
         }
 
         return $this;
@@ -109,8 +109,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->loans->removeElement($loan)) {
             // set the owning side to null (unless already changed)
-            if ($loan->getUserId() === $this) {
-                $loan->setUserId(null);
+            if ($loan->getUser() === $this) {
+                $loan->setUser(null);
             }
         }
 

@@ -6,6 +6,7 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
@@ -16,6 +17,7 @@ class Book
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message: "Le titre est obligatoire")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255, nullable: true)]

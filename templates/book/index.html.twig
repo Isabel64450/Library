@@ -36,7 +36,9 @@
                         </td>
                         <td>
                             <a class="btn btn-sm btn-info" href="{{ path('app_book_show', {'id': book.id}) }}">Show</a>
+                             {% if is_granted('ROLE_ADMIN') %}
                             <a class="btn btn-sm btn-warning" href="{{ path('app_book_edit', {'id': book.id}) }}">Edit</a>
+                             {% endif %}
                             <a class="btn btn-sm btn-success" href="{{ path('app_loan_new', {'id': book.id}) }}" >Loan</a>
                         </td>
                     </tr>
@@ -49,7 +51,9 @@
             </table>
 
             <div class="text-center mt-3">
+                 {% if is_granted('ROLE_ADMIN') %}
                 <a class="btn btn-primary" href="{{ path('app_book_new') }}">Create New Book</a>
+                {% endif %}
             </div>
         </div>
     </div>

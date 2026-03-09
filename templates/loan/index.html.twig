@@ -27,7 +27,7 @@
 
                 <tbody>
 
-                {% for loan in loans %}
+                {% for loan in loans| slice(0,10) %}
 
                     <tr>
                        
@@ -66,12 +66,7 @@
                                 Rendre
                             </a>
 
-                            <a href="#{# {{ path('app_loan_delete', {'id': loan.id}) }} #}" 
-                               class="btn btn-sm btn-danger"
-                               onclick="return confirm('Supprimer ce loan ?')">
-                                Supprimer
-                            </a>
-
+                              
                         </td>
 
                     </tr>
