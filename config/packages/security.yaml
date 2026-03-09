@@ -22,7 +22,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_book_index
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -40,6 +40,8 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/loan, roles: ROLE_USER }
+        # - { path: ^/book, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 when@test:
     security:

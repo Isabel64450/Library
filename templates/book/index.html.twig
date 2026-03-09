@@ -39,7 +39,14 @@
                              {% if is_granted('ROLE_ADMIN') %}
                             <a class="btn btn-sm btn-warning" href="{{ path('app_book_edit', {'id': book.id}) }}">Edit</a>
                              {% endif %}
-                            <a class="btn btn-sm btn-success" href="{{ path('app_loan_new', {'id': book.id}) }}" >Loan</a>
+                              {% if is_granted('ROLE_USER') %}
+      
+                            <a class="btn btn-sm btn-success" href="{{ path('app_loan_new', {'id': book.id}) }}">Loan</a>
+                            {% else %}
+                            <a class="btn btn-sm btn-primary" href="{{ path('app_login') }}">Loan?</a>
+                            
+                            {% endif %}
+                           
                         </td>
                     </tr>
                 {% else %}

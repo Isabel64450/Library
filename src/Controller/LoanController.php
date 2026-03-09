@@ -41,13 +41,16 @@ final class LoanController extends AbstractController
         
          if ($form->isSubmitted() && $form->isValid()) {    
                            
+             if (!$this->isGranted('ROLE_ADMIN')) {
+            $loan->setUser($this->getUser());
+              }
         $book->setStock($book->getStock() - 1);
             
             $entityManager->persist($loan);
             $entityManager->flush();
 
             $this->addFlash('success', 'Loan created successfully!');           
-            return $this->redirectToRoute('app_loan_list');
+            return $this->redirectToRoute('app_book_index');
         }       
 
         return $this->render('loan/new.html.twig', [
@@ -67,7 +70,7 @@ public function editLoan(Loan $loan, EntityManagerInterface $entityManager): Res
     $entityManager->persist($loan);
     $entityManager->flush();
 
-    $this->addFlash('success', 'Emprunt marqué comme terminé !');
+    $this->addFlash('success', 'Borrowing marked as completed!');
 
     return $this->redirectToRoute('app_loan_list');
 }
