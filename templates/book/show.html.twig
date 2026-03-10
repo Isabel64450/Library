@@ -9,7 +9,16 @@
 
             <div class="card shadow p-4">
                 <h1 class="mb-4 text-center">Book Details</h1>
-
+               <div class="text-center mb-4">
+                  {% if book.Image %}
+               <img src="{{ asset('uploads/images/'~ book.Image) }}" 
+                 alt="Couverture de {{ book.title }}" 
+                 class="img-fluid rounded shadow" 
+                 style="max-height: 300px;">
+                {% else %}
+             <p>Aucune couverture disponible</p>
+                   {% endif %}
+              </div>
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
@@ -31,6 +40,10 @@
                         <tr>
                             <th scope="row">Stock</th>
                             <td>{{ book.stock }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Description</th>
+                             <td>{{ book.description ?: 'Pas de description disponible.' }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -35,6 +35,12 @@ class Book
     #[ORM\OneToMany(targetEntity: Loan::class, mappedBy: 'book_id', orphanRemoval: true)]
     private Collection $loans;
 
+    #[ORM\Column(length: 240, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 180, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->loans = new ArrayCollection();
@@ -119,6 +125,30 @@ class Book
                 $loan->setBook(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

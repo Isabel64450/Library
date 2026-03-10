@@ -7,9 +7,11 @@ use App\Form\BookType;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/book')]
 final class BookController extends AbstractController
@@ -23,13 +25,30 @@ final class BookController extends AbstractController
     }
 
     #[Route('admin/new', name: 'app_book_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+               $image = $form->get('image')->getData();
+
+            if ($image) {
+                $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeImageName = $slugger->slug($originalName);
+                $newFileImageName = $safeImageName.'-'.uniqid().'.'.$image->guessExtension();
+
+               try {
+                    $image->move
+                        ($this->getParameter('image_directory'),
+                        $newFileImageName);
+                }catch (FileException $exception) {}
+                    $book->setImage($newFileImageName); 
+                
+            }
+
             $entityManager->persist($book);
             $entityManager->flush();
 
@@ -51,12 +70,28 @@ final class BookController extends AbstractController
     }
 
     #[Route('admin/{id}/edit', name: 'app_book_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Book $book, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Book $book, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             $image = $form->get('image')->getData();
+
+            if ($image) {
+                $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeImageName = $slugger->slug($originalName);
+                $newFileImageName = $safeImageName.'-'.uniqid().'.'.$image->guessExtension();
+
+               try {
+                    $image->move
+                        ($this->getParameter('image_directory'),
+                        $newFileImageName);
+                }catch (FileException $exception) {}
+                    $book->setImage($newFileImageName); 
+                
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
