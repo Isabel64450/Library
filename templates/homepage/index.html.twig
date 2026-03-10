@@ -5,35 +5,65 @@
 {% block body %}
 <div class="container">
     <h1 class="mb-5 mt-5 text-white">Books</h1>
+
+           <form method="get" action="{{ path('app_homepage') }}" class="mb-5">
+
+              <input type="text" name="search" class="form-control form-control-lg" placeholder="Search by title or author..." value="{{ app.request.get('search') }}">
+
+           </form>
+
     
     <div class="row">
-        {% for book in books %}
-            <div class="col-md-3 mt-4 d-flex">
-                <div class="card h-100" style="width: 18rem;">
-                      <div class="overflow-hidden" style="height: 400px;">
-                      <img src="{{ asset('uploads/images/'~book.image)}}" class="card-img-top img-fluid" 
+
+
+        <div class="col-md-2">
+
+             <div class="d-flex flex-column gap-2">
+
+               <a href="{{ path('app_homepage') }}"  class="btn btn-light text-dark rounded-pill w-auto"> All books</a>
+
+               <a href="{{ path('app_homepage', {stock:1}) }}"  class="btn btn-success text-white rounded-pill w-auto">Available</a>
+
+               <a href="{{ path('app_homepage', {stock:0}) }}"   class="btn btn-danger text-white rounded-pill w-auto mb-4">Out of stock</a>
+
+            </div>   
+
+        </div>
+
+        <div class="col-md-10">
+
+             <div class="row g-3">
+
+                {% for book in books %}
+                 <div class="col-12 col-md-6 col-lg-3 d-flex">
+                     <div class="card h-100">
+                        <div class="overflow-hidden" style="height: 400px;">
+                         <img src="{{ asset('uploads/images/'~book.image)}}" class="card-img-top img-fluid" 
                            style="width: 100%; height: 100%; object-fit: cover;"
                            alt="image of the book cover"> 
-                      </div>                   
-                    <div class="card-body d-flex flex-column">
-                        <a class="titlebookLink" href= " {{ path('app_book_show',{'id':book.id}) }} "><h5 class="card-title titlebook">{{ book.title }}</h5></a> 
-                        <p class="card-text">{{ book.description|slice(0,60) }}...</p>
-                        <h3 class="fs-6 mt-auto">In stock: {{ book.stock }}</h3>
-                        {% if not app.user %}  
-                        <a href="{{ path('app_login') }}" class="btn btn-outline-success mt-2">Loan ?</a>
+                        </div>                   
+                        <div class="card-body d-flex flex-column">
+                          <a class="titlebookLink" href= " {{ path('app_book_show',{'id':book.id}) }} "><h5 class="card-title titlebook">{{ book.title }}</h5></a> 
+                          <p class="card-text">{{ book.description|slice(0,60) }}...</p>
+                          <h3 class="fs-6 mt-auto">In stock: {{ book.stock }}</h3>
+                          {% if not app.user %}  
+                          <a href="{{ path('app_login') }}" class="btn btn-outline-success mt-2">Loan ?</a>
                           {% elseif is_granted('ROLE_ADMIN') %}
    
-                         <a href="{{ path('app_book_edit', {'id': book.id}) }}" class="btn btn-warning mt-2">Edit</a>
+                          <a href="{{ path('app_book_edit', {'id': book.id}) }}" class="btn btn-warning mt-2">Edit</a>
                              {% else %}
    
                           <a href="{{ path('app_loan_new', {'id': book.id}) }}" class="btn btn-success mt-2">Loan</a>
                             {% endif %}
                         
-                    </div>
-                </div>
+                        </div>
+                     </div>
+                 </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+                    {# {{ knp_pagination_render(books, 'layouts/pagination_template.html.twig') }} #}
+         </div>
     </div>
-    {# {{ knp_pagination_render(books, 'layouts/pagination_template.html.twig') }} #}
 </div>
+
 {% endblock %}

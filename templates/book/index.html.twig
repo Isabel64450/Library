@@ -8,6 +8,26 @@
     <div class="card shadow">
         <div class="card-body">
             <h1 class="mb-4 text-center">Books catalogue</h1>
+
+             <form method="get" action="{{ path('app_book_index') }}" class="row mb-4">
+                <div class="col-md-4">
+                    <input type="text" name="title" class="form-control" placeholder="Search by title" value="{{ app.request.get('title') }}">
+                </div>
+
+                <div class="col-md-4">
+                <input type="text" name="author" class="form-control" placeholder="Search by author" value="{{ app.request.get('author') }}">
+                </div>
+
+                <div class="col-md-2">
+                <button class="btn btn-primary w-100">Search</button>
+                </div>
+                <div class="col-md-2">
+                <a href="{{ path('app_book_index') }}" class="btn btn-secondary w-100">Reset</a>
+                </div>
+             </form>
+
+
+
              {% include 'layouts/_flash_message.html.twig' %}
             <table class="table table-striped table-hover">
                 <thead class="table-dark">

@@ -17,11 +17,20 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class BookController extends AbstractController
 {
     #[Route('/', name: 'app_book_index', methods: ['GET'])]
-    public function index(BookRepository $bookRepository): Response
-    {
-        return $this->render('book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
-        ]);
+    public function index(BookRepository $bookRepository, Request $request ): Response
+    {   
+        $title = $request->query->get('title');
+        $author = $request->query->get('author');
+        $books = $bookRepository->search($title, $author);
+        if ($title || $author) {
+        $books = $bookRepository->search($title, $author);
+        } else {
+        $books = $bookRepository->findAll();
+        }
+
+    return $this->render('book/index.html.twig', [
+        'books' => $books,
+    ]);
     }
 
     #[Route('admin/new', name: 'app_book_new', methods: ['GET', 'POST'])]

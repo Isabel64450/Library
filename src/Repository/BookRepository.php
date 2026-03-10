@@ -16,6 +16,47 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function search(?string $title, ?string $author): array
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        if ($title) {
+            $qb->andWhere('b.title LIKE :title')
+               ->setParameter('title', '%'.$title.'%');
+        }
+
+        if ($author) {
+            $qb->andWhere('b.author LIKE :author')
+               ->setParameter('author', '%'.$author.'%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function filter(?string $search, ?string $stock): array
+{
+    $qb = $this->createQueryBuilder('b');
+
+    
+    if ($search) {
+        $qb->andWhere('b.title LIKE :search OR b.author LIKE :search')
+           ->setParameter('search', '%'.$search.'%');
+    }
+
+   
+    if ($stock !== null && $stock !== '') {
+        if ($stock == 1) {
+            $qb->andWhere('b.stock > 0');
+        } else { 
+            $qb->andWhere('b.stock = 0');
+        }
+    }
+
+    return $qb->getQuery()->getResult();
+}
+
+
+
     //    /**
     //     * @return Book[] Returns an array of Book objects
     //     */
