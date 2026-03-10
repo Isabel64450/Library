@@ -6,7 +6,7 @@
 <div class="container mt-5">
        <div class="card shadow">
               <div class="card-body">
-                     <h1>User index</h1>
+                     <h1>User List</h1>
 
                      <table class="table">
                      <thead>
@@ -34,8 +34,9 @@
                     {% endif %}</td>
                 
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-outline-primary">show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-outline-primary">edit</a>
+                    <a onclick= "return confirm('Voulez vous vraiment supprimer cet utilisateur ?')" href="{{ path('app_user_delete', {'id':user.id}) }}" class="btn btn-danger">delete</a>
                 </td>
             </tr>
         {% else %}
@@ -46,7 +47,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+    {# <a href="{{ path('app_user_new') }}" class="btn btn-outline-primary">Create new</a> #}
 
               </div>
        </div>
