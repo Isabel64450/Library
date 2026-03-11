@@ -31,18 +31,16 @@
                 {% endif %}
 
                 <div class="row mb-3">
-                    <div class="col-md-6">
-                        {{ form_label(form.loanDate, 'Date emprunt') }}
-                        {{ form_widget(form.loanDate, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.loanDate) }}
+                   <div class="col-md-6">
+                        <label class="form-label">Date emprunt</label>
+                           <input class="form-control" value="{{ loan.loanDate|date('d/m/Y') }}" readonly>
                     </div>
-                    <div class="col-md-6">
-                        {{ form_label(form.returnDate, 'Date retour') }}
-                        {{ form_widget(form.returnDate, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.returnDate) }}
-                    </div>
-                </div>
 
+                   <div class="col-md-6">
+                       <label class="form-label">Date retour</label>
+                           <input class="form-control" value="{{ loan.returnDate|date('d/m/Y') }}" readonly>
+                   </div>
+                </div>
                 
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-success px-5">ENREGISTRER L'EMPRUNT</button>

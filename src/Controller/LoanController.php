@@ -6,6 +6,7 @@ use App\Entity\Book;
 use App\Entity\Loan;
 use App\Entity\User;
 use App\Form\LoanType;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,8 @@ final class LoanController extends AbstractController
         }
         $loan = new Loan();     
         $loan->setBook($book);  
+        $loan->setLoanDate(new DateTimeImmutable());
+        $loan->setReturnDate((new DateTimeImmutable())->modify('+14 days'));
         $form = $this->createForm(LoanType::class, $loan);        
         $form->handleRequest($request);
         

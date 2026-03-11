@@ -23,16 +23,7 @@ class LoanType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var User|null $user */
-        $user = $this->security->getUser();
-        $builder
-            ->add('loanDate', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('returnDate', null, [
-                'widget' => 'single_text',
-            ]);
-            
-            
+        $user = $this->security->getUser();                  
          
            if ($user instanceof User && $this->security->isGranted('ROLE_ADMIN')) {
 

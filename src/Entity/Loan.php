@@ -94,4 +94,16 @@ class Loan
 
         return $this;
     }
+
+
+     public function isDelayed(): bool
+    {
+        
+        if ($this->status === 'completed') {
+            return false;
+        }
+
+        
+        return $this->returnDate !== null && new \DateTimeImmutable() > $this->returnDate;
+    }
 }

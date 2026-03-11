@@ -27,7 +27,7 @@
 
                 <tbody>
 
-                {% for loan in loans| slice(0,10) %}
+                {% for loan in loans| slice(0,20) %}
 
                     <tr>
                        
@@ -45,13 +45,13 @@
                         </td>
 
                         <td>
-                            {% if loan.status == 'current' %}
-                                <span class="badge bg-primary">Current</span>
-                            {% elseif loan.status == 'delayed' %}
-                                <span class="badge bg-danger">Delayed</span>
-                            {% elseif loan.status == 'completed' %}
-                                <span class="badge bg-success">Completed</span>
-                            {% endif %}
+                            {% if loan.status == 'completed' %}
+                             <span class="badge bg-success">Completed</span>
+                            {% elseif loan.isDelayed %}
+                            <span class="badge bg-danger">Delayed</span>
+                            {% else %}
+                            <span class="badge bg-primary">Current</span>
+                             {% endif %}
                         </td>
 
                         <td class="text-center">
